@@ -21,3 +21,10 @@ def safe_call(f: Callable, **kwargs):
                                 str(function_args[key]) + " but got " +
                                 str(type(kwargs[key])))
     return f(**kwargs)
+
+def print_sorted():
+    # maybe function for every type and like recursive but wide
+    assert False, "not implemented yet"
+
+def find_root():
+    assert False, "not implemented yet"
