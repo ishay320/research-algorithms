@@ -1,5 +1,7 @@
 from typing import Callable
-def safe_call(f:Callable, **kwargs):
+
+
+def safe_call(f: Callable, **kwargs):
     # check if the first is function
     if callable(f):
         # check the kwargs arguments
@@ -18,16 +20,4 @@ def safe_call(f:Callable, **kwargs):
                 raise TypeError('ERROR: expected arg "' + key + '" to be ' +
                                 str(function_args[key]) + " but got " +
                                 str(type(kwargs[key])))
-
-        # # check the args arguments
-        # print('function_args: ',function_args)
-        # print('f.__code__.co_varnames: ',f.__code__.__annotations__)
-        # print('args: ',args)
-        # for i, key in enumerate(function_args): # FIXME: need to add the non annotated args
-        #     if len(args) <= i:  # check for out of bound
-        #         raise TypeError("ERROR: not enough args to send to function")
-        #     if function_args[key] is not type(args[i]):
-        #         raise TypeError("ERROR: expected in arg '" + str(key) + "' :" +
-        #                         str(function_args[key]) + " but got " +
-        #                         str(type(args[i])))
     return f(**kwargs)
