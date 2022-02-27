@@ -16,6 +16,8 @@ class safe_callTestCase(unittest.TestCase):
         self.assertEqual(ex1.safe_call(f, a=1, b=1.2, c="string"), ["2.2", "string"])
         self.assertEqual(ex1.safe_call(f, b=1.2, a=1, c="string"), ["2.2", "string"])
         self.assertEqual(ex1.safe_call(f, c="string", b=1.2, a=1), ["2.2", "string"])
+        with self.assertRaises(TypeError):
+             ex1.safe_call(f, c=1, b=1.2, a=1)
 
     def test_half_annotation(self):
         # setUp
@@ -26,6 +28,8 @@ class safe_callTestCase(unittest.TestCase):
         self.assertEqual(ex1.safe_call(f, a=1, b=1.2, c="string"), ["2.2", "string"])
         self.assertEqual(ex1.safe_call(f, b=1.2, a=1, c="string"), ["2.2", "string"])
         self.assertEqual(ex1.safe_call(f, c="string", b=1.2, a=1), ["2.2", "string"])
+        with self.assertRaises(TypeError):
+             ex1.safe_call(f, c=1, b=1.2, a=1)
 
     def test_no_annotation(self):
         # setUp
