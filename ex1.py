@@ -22,9 +22,35 @@ def safe_call(f: Callable, **kwargs):
                                 str(type(kwargs[key])))
     return f(**kwargs)
 
-def print_sorted():
+def sort_list(l:list)->list:
+    l = l.copy()
+    l.sort()
+    return l
+
+def sort_set(s:set)->set:
+    s = [s.copy()]
+    s.sort()
+    return s[0]
+
+def sort_dict(d:dict)->dict:
+    return  {k: v for k, v in sorted(d.items(), key=lambda x: x[0])}
+
+def sort_tuple(t:tuple)->tuple:
+    t = sorted(t)
+    return tuple(t)
+
+
+def print_sorted(obj:set):
+    if(obj.__class__ == list):
+        obj = sort_list(obj)
+    elif(obj.__class__ == set):
+        obj = sort_set(obj)
+    elif(obj.__class__ == dict):
+        obj = sort_dict(obj)
+    elif(obj.__class__ == tuple):
+        obj = sort_tuple(obj)
     # maybe function for every type and like recursive but wide
-    assert False, "not implemented yet"
+    return obj
 
 def find_root():
     assert False, "not implemented yet"
