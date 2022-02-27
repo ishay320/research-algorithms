@@ -4,9 +4,6 @@ import ex1
 
 # test safe args:
 class safe_callTestCase(unittest.TestCase):
-    # def setUp(self):
-    #     pass
-
     def test_full_annotation(self):
         # setUp
         def f(a: int, b: float, c: str) -> list:
@@ -43,22 +40,30 @@ class safe_callTestCase(unittest.TestCase):
 
 # test print sorted:
 class print_sortedTestCase(unittest.TestCase):
-    def test_one_deep(self):
-        # setUp
-        l:list = [7, 5, 3, 2, 1, 4, 6, 9, 8]
-        d:dict = {'c' : 9, 'a' : 5, 'b' : 4} # ans:  {'a' : 5, 'b' : 4, 'c' : 9}
-        s:set = {7, 5, 3, 2, 1, 4, 6, 9, 8}
-        t:tuple = (7, 5, 3, 2, 1, 4, 6, 9, 8)
+    def setUp(self):
+        self.l:list = [7, 5, 3, 2, 1, 4, 6, 9, 8]
+        self.d:dict = {'c' : 9, 'a' : 5, 'b' : 4} # ans:  {'a' : 5, 'b' : 4, 'c' : 9}
+        self.s:set = {7, 5, 3, 2, 1, 4, 6, 9, 8}
+        self.t:tuple = (7, 5, 3, 2, 1, 4, 6, 9, 8)
 
-        # Tests
+    def test_one_deep(self):
         # list
-        self.assertEqual(ex1.print_sorted(l), [1, 2, 3, 4, 5, 6, 7, 8, 9])
+        self.assertEqual(ex1.print_sorted(self.l), [1, 2, 3, 4, 5, 6, 7, 8, 9])
         # dict
-        self.assertEqual(ex1.print_sorted(d), {'a' : 5, 'b' : 4, 'c' : 9})
+        self.assertEqual(ex1.print_sorted(self.d), {'a' : 5, 'b' : 4, 'c' : 9})
         # set
-        self.assertEqual(ex1.print_sorted(s), {1, 2, 3, 4, 5, 6, 7, 8, 9})
+        self.assertEqual(ex1.print_sorted(self.s), {1, 2, 3, 4, 5, 6, 7, 8, 9})
         # tuple
-        self.assertEqual(ex1.print_sorted(t), (1, 2, 3, 4, 5, 6, 7, 8, 9))
+        self.assertEqual(ex1.print_sorted(self.t), (1, 2, 3, 4, 5, 6, 7, 8, 9))
+
+    def test_two_deep(self):
+        new_d = {'c' : self.t, 'a' : self.s, 'b' : self.l}
+        self.assertEqual(ex1.print_sorted(new_d), {'a' : {1, 2, 3, 4, 5, 6, 7, 8, 9}, 'b' : [1, 2, 3, 4, 5, 6, 7, 8, 9], 'c' : (1, 2, 3, 4, 5, 6, 7, 8, 9)})
+
+    def test_three_deep(self):
+        new_d = {'c' : {'c' : self.t, 'a' : 5, 'b' : 4}, 'a' : self.s, 'b' : self.l}
+        self.assertEqual(ex1.print_sorted(new_d), {'a' : {1, 2, 3, 4, 5, 6, 7, 8, 9}, 'b' : [1, 2, 3, 4, 5, 6, 7, 8, 9], 'c' : {'a' : 5, 'b' : 4, 'c' : (1, 2, 3, 4, 5, 6, 7, 8, 9)}})
+
 
 if __name__ == "__main__":
     unittest.main()

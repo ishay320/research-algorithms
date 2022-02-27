@@ -22,34 +22,32 @@ def safe_call(f: Callable, **kwargs):
                                 str(type(kwargs[key])))
     return f(**kwargs)
 
-def sort_list(l:list)->list:
-    l = l.copy()
-    l.sort()
-    return l
+def _sort_list(l:list)->list:
+    l = sorted(l)
+    return list(print_sorted(x) for x in l)
 
-def sort_set(s:set)->set:
-    s = [s.copy()]
-    s.sort()
-    return s[0]
+def _sort_set(s:set)->set:
+    s = sorted([s.copy()])
+    return set(print_sorted(x) for x in s[0])
 
-def sort_dict(d:dict)->dict:
-    return  {k: v for k, v in sorted(d.items(), key=lambda x: x[0])}
+def _sort_dict(d:dict)->dict:
+    return  {k: print_sorted(v) for k, v in sorted(d.items(), key=lambda x: x[0])}
 
-def sort_tuple(t:tuple)->tuple:
+def _sort_tuple(t:tuple)->tuple:
     t = sorted(t)
-    return tuple(t)
+    for x in t:
+        print_sorted
+    return tuple(print_sorted(x) for x in t)
 
-
-def print_sorted(obj:set):
+def print_sorted(obj):
     if(obj.__class__ == list):
-        obj = sort_list(obj)
+        obj = _sort_list(obj)
     elif(obj.__class__ == set):
-        obj = sort_set(obj)
+        obj = _sort_set(obj)
     elif(obj.__class__ == dict):
-        obj = sort_dict(obj)
+        obj = _sort_dict(obj)
     elif(obj.__class__ == tuple):
-        obj = sort_tuple(obj)
-    # maybe function for every type and like recursive but wide
+        obj = _sort_tuple(obj)
     return obj
 
 def find_root():
