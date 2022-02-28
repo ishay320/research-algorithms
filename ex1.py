@@ -55,6 +55,10 @@ def approx_point_derivative(func:Callable,a):
     return float("{:.3f}".format((func(a+epsilon)-func(a))/epsilon))
 
 def find_root(func:Callable,a,b):
+    '''
+    reference: http://www.arazim-project.com/sites/default/files/public/lesson_sums/numerical_anaysis_2017b_lec4.pdf
+               1.3
+    '''
     x = (a+b)/2
     for _ in range(20):
         y = func(x)
