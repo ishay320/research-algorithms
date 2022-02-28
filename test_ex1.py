@@ -64,6 +64,12 @@ class print_sortedTestCase(unittest.TestCase):
         new_d = {'c' : {'c' : self.t, 'a' : 5, 'b' : 4}, 'a' : self.s, 'b' : self.l}
         self.assertEqual(ex1.print_sorted(new_d), {'a' : {1, 2, 3, 4, 5, 6, 7, 8, 9}, 'b' : [1, 2, 3, 4, 5, 6, 7, 8, 9], 'c' : {'a' : 5, 'b' : 4, 'c' : (1, 2, 3, 4, 5, 6, 7, 8, 9)}})
 
+# test find root:
+class find_rootTestCase(unittest.TestCase):
+    def test_numbers(self):
+        self.assertEqual(ex1.find_root(lambda x:x**2-4,1,3), 2)
+        self.assertEqual(round(ex1.find_root(lambda x:x**2-8,1,3),8), 2.82842712) # root 2 of 8
+        self.assertEqual(round(ex1.find_root(lambda x:x**3-16,1,3),6), 2.519842) # root 3 of 16
 
 if __name__ == "__main__":
     unittest.main()

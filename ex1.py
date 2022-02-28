@@ -50,5 +50,16 @@ def print_sorted(obj):
         obj = _sort_tuple(obj)
     return obj
 
-def find_root():
-    assert False, "not implemented yet"
+def approx_point_derivative(func:Callable,a):
+    epsilon = 0.00000000001
+    return float("{:.3f}".format((func(a+epsilon)-func(a))/epsilon))
+
+def find_root(func:Callable,a,b):
+    x = (a+b)/2
+    for _ in range(20):
+        y = func(x)
+        yDeriv = approx_point_derivative(func, x)
+        #  Newton–Raphson method - the recursive function
+        x = x - (y / yDeriv)
+
+    return x
