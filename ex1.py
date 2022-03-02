@@ -36,7 +36,7 @@ def _sort_dict(d:dict)->dict:
 def _sort_tuple(t:tuple)->tuple:
     t = sorted(t)
     for x in t:
-        print_sorted
+        print_sorted(x)
     return tuple(print_sorted(x) for x in t)
 
 def print_sorted(obj):
