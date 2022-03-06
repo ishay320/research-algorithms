@@ -1,3 +1,4 @@
+import inspect
 import sys
 from tracemalloc import start
 from typing import Callable
@@ -22,27 +23,37 @@ def parser(argv: list[str]):
 
 def main(argv: list[str]):
     (input_name, output_name) = parser(argv)
+    # TODO: print to file
     # with open(output_name) as output_file:
     try:
-        print("File: " + input_name.removeprefix(".\\"))
+        print("python file name: " + input_name.removeprefix(".\\"))
         command_module = __import__(input_name[2:-3])
-        for obj in dir(command_module):
+
+        for obj in dir(command_module): # if hidden continue
             if("__" == obj[:2]):
                 continue
+
             print(obj + "  " + str(eval("type(command_module."+obj+")"))+" :") # name + type
-            print(str(eval("command_module." + obj + ".__doc__"))) # doc
-            print(issubclass(type(eval("command_module." + obj)),Callable))
-            if(issubclass(type(eval("command_module." + obj)),Callable)): # if function then arguments
+
+            doc = eval("command_module." + obj + ".__doc__") # doc
+            if(doc != None):
+                print(str(doc)) 
+            
+            # function printing
+            if(str(type(eval("command_module." + obj))) == "<class 'function'>"): 
                 print("Function arguments:")
                 for arg in eval("command_module." + obj + ".__code__.co_varnames"):
                     print("\t" + arg, end=' ')
                     if(arg in eval("command_module." + obj + ".__annotations__")):
-                        print("type: " + str(eval("command_module."+obj+".__annotations__")[arg]))
+                        print("| type: " + str(eval("command_module."+obj+".__annotations__")[arg]))
                     else:
-                        print()
+                        print(" |")
                 if('return' in eval("command_module." + obj + ".__annotations__")):
                     print()
                     print("return type: " + str(eval("command_module." + obj + ".__annotations__")['return']))
+
+            # TODO: print class type
+            # print(inspect.getmembers(eval("command_module." + obj )))
             print("------------------------")
             
     except ImportError as err:

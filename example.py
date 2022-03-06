@@ -13,6 +13,9 @@ def secondFun(test:list,*args)-> str:
     return str(test)
 
 class FirstClass(int):
+    '''
+    class doc
+    '''
     def __init__(self) -> None:
         super().__init__()
     def firstFunction(self,a:int,b:str):
