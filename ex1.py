@@ -35,8 +35,6 @@ def _sort_dict(d:dict)->dict:
 
 def _sort_tuple(t:tuple)->tuple:
     t = sorted(t)
-    for x in t:
-        print_sorted
     return tuple(print_sorted(x) for x in t)
 
 def print_sorted(obj):
@@ -56,8 +54,8 @@ def approx_point_derivative(func:Callable,a):
 
 def find_root(func:Callable,a,b):
     '''
-    reference: http://www.arazim-project.com/sites/default/files/public/lesson_sums/numerical_anaysis_2017b_lec4.pdf
-               1.3
+     reference: http://www.arazim-project.com/sites/default/files/public/lesson_sums/numerical_anaysis_2017b_lec4.pdf
+                1.3
     '''
     x = (a+b)/2
     for _ in range(20):
