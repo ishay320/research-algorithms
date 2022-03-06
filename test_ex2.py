@@ -2,7 +2,7 @@ import unittest
 import ex2
 
 
-# test safe args:
+# test last call:
 class lastcallTestCase(unittest.TestCase):
     def test_simple(self):
         # setUp
@@ -34,6 +34,19 @@ class lastcallTestCase(unittest.TestCase):
         # check if remember only last
         self.assertEqual(fillList(1, 5, "Hi"),['Hi', 'Hi', 'Hi', 'Hi'])
 
+# test List:
+class ListTestCase(unittest.TestCase):
+    def test_simple(self):
+        # setUp
+        mylist = ex2.List([
+            [[1,2,3,33],[4,5,6,66]],
+            [[7,8,9,99],[10,11,12,122]],
+            [[13,14,15,155],[16,17,18,188]],
+            ])
+
+        # Tests
+        self.assertEqual(mylist[0,1,3], 66)
+        self.assertEqual(mylist[1], [[7, 8, 9, 99], [10, 11, 12, 122]])
 
 if __name__ == "__main__":
     unittest.main()
