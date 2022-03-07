@@ -1,6 +1,7 @@
 import inspect
 import sys
 
+# all can be done with help(module) but i took the challenge
 
 def eprint(*args, **kwargs) -> None:
     print(*args, file=sys.stderr, **kwargs)
