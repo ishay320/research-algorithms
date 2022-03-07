@@ -6,7 +6,7 @@ class lastcall:
         self.last_call = ""
         self.last_ret = ""
 
-    def __call__(self, *args, **kwds) -> str | object:
+    def __call__(self, *args, **kwds):
         argument = str(args) + str(kwds) # combine to str for easy checking
         if argument == self.last_call:
             return f"I already told you that the answer is {self.last_ret}!"
