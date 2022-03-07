@@ -1,4 +1,5 @@
 # this is example for testing ex2
+import math
 
 def firstFun(a:int,b:str)-> list:
     '''
@@ -16,7 +17,13 @@ class FirstClass(int):
     '''
     class doc
     '''
+    x = 3
     def __init__(self) -> None:
         super().__init__()
+        self.item = "item"
+
     def firstFunction(self,a:int,b:str):
+        '''
+        class function
+        '''
         pass
