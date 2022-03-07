@@ -19,7 +19,7 @@ class List(list):
     def __init__(self, list) -> None:
         super().__init__(list)
 
-    def __getitem__(self, pos: int | tuple):
+    def __getitem__(self, pos):
         if not isinstance(pos,tuple): # if only 1 num then send to super
             return super().__getitem__(pos)
         
