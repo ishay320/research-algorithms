@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block header %}
+
+<h1>Improved Bin Completion Algorithm</h1>
+
+{% endblock header %}
+{% block content %}
+<div class="content-section">
+
+    <form method="POST" action="/">
+        <!-- action "" means to return to the same page at submit.-->
+        <h2>Wrong Input! <br> There was error, check your input, maybe bin size is bigger then input?<br></h2>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock content %}

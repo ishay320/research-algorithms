@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Educational registration form</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <style>
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body,
+    div,
+    form,
+    input,
+    select,
+    p,
+    content-block {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 16px;
+      color: #eee;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-weight: 400;
+      margin: 0 0 0 8px;
+    }
+
+    .main-block {
+      display: flow;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 25px;
+      background: rgba(70, 48, 62, 0.5);
+    }
+
+    .intro,
+    form,
+    content-block {
+      padding: 25px;
+    }
+
+    .intro {
+      text-align: center;
+    }
+
+    .fa-graduation-cap {
+      font-size: 72px;
+    }
+
+    form,
+    content-block {
+      text-align: center;
+      background: rgba(65, 49, 60, 0.7);
+    }
+
+    .title {
+      text-align: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input,
+    select {
+      padding: 5px;
+      margin-bottom: 30px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #eee;
+    }
+
+    input::placeholder {
+      color: #eee;
+    }
+
+    option:focus {
+      border: none;
+    }
+
+    option {
+      background: rgb(43, 25, 37);
+      border: none;
+    }
+
+    .checkbox input {
+      margin: 0 10px 0 0;
+      vertical-align: middle;
+    }
+
+    .checkbox a {
+      color: #e0266d;
+    }
+
+    .checkbox a:hover {
+      color: #dd528c;
+    }
+
+    .btn-item,
+    button {
+      padding: 10px 5px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: none;
+      background: #8b2675;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgb(214, 205, 205);
+    }
+
+    .btn-item {
+      display: inline-block;
+      margin: 20px 5px 0;
+    }
+
+    button {
+      width: 100%;
+    }
+
+    button:hover,
+    .btn-item:hover {
+      background: #a983c2;
+    }
+
+    @media (min-width: 568px) {
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      .main-block {
+        flex-direction: row;
+        height: calc(100% - 50px);
+      }
+
+      .intro,
+      form,
+      content-block {
+        flex: 1;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-block">
+
+    <div class="intro">
+      {% block header %}
+      {% endblock %}
+    </div>
+    <div class="content-block">
+      {% block content %}
+      {% endblock %}
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block header %}
+<h1>Improved Bin Completion Algorithm</h1>
+
+{% endblock header %}
+{% block content %}
+<div class="content-section">
+
+    <form method="POST" action="/">
+        <!-- action "" means to return to the same page at submit.-->
+        <h2>Input:</h2>
+        <h3>Bin size: {{ bin_size }}</h3>
+        <h3>Input items: {{ input_items }}<br><br></h3>
+
+        <h2>Result:</h2>
+        {% for bin in result %}
+        <h3>Bin {{ loop.index0 + 1 }} : {{ bin }}</h3>
+        {% endfor %}
+        {{ form.hidden_tag() }}
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock content %}
