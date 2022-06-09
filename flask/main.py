@@ -1,7 +1,7 @@
 import os
 import json
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, Response, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, IntegerField, TextAreaField
 from wtforms.validators import InputRequired
@@ -16,6 +16,7 @@ app.config['SECRET_KEY'] = SECRET_KEY
 
 class HomeForm(FlaskForm):
     submit = SubmitField('Return Home')
+    download = SubmitField('DOWNLOAD')
 
 # This form is used for the algorithms input
 class DataForm(FlaskForm):
@@ -30,9 +31,20 @@ def apply():
     result = json.loads(request.args['result'])
     bin_size = request.args['bin_size']
     input_items = request.args['items']
+    csv = request.args['csv']
 
-    return render_template('result.html', form=HomeForm(), len=len(result), result=result, bin_size=f"{bin_size}" ,input_items= f"{input_items}")
+    return render_template('result.html', form=HomeForm(), len=len(result), result=result, bin_size=f"{bin_size}" ,input_items= f"{input_items}",csv=csv)
 
+
+@app.route('/download', methods=['GET', 'POST'])
+def download():
+    # result = json.loads(request.args['result'])
+    csv = request.form['csv'] 
+    return Response(
+        csv,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                "attachment; filename=myplot.csv"})
 
 # This function is our home page. The user should insert the input here.
 @app.route('/', methods=['GET', 'POST'])
@@ -49,8 +61,18 @@ def run():
             items = [int(s) for s in items_str]
             result = improved_bin_completion(BinsKeepingContents(), bin_size, items)
 
+            csv = ''
+            for i in range(result.num):
+                all = result.bin_to_str(i).replace('[','').split(']')
+                bins = all[0].split(',')
+                for num in bins:
+                    csv += num 
+                    csv += ','
+                csv += '\n'
+
+            print(csv)
             # Results page:
-            return redirect(url_for(apply.__name__, bin_size=bin_size, items=items.__str__(), result=result.bins.__str__()))
+            return redirect(url_for(apply.__name__, bin_size=bin_size, items=items.__str__(), csv=csv, result=result.bins.__str__()))
         except Exception:
             # Error page:
             return render_template('fail.html', form=HomeForm())
@@ -58,4 +80,4 @@ def run():
         return render_template('index.html', form=input_form)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)

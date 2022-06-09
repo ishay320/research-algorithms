@@ -19,5 +19,15 @@
         {{ form.hidden_tag() }}
         <p>{{ form.submit() }}</p>
     </form>
+
+    <form method="POST" action="/download">
+        <!-- action "" means to return to the same page at submit.-->
+        <h2>download:</h2>
+        <textarea style="display:none;" name="csv">
+            {{csv}}
+        </textarea>
+
+        <p>{{ form.download() }}</p>
+    </form>
 </div>
 {% endblock content %}
